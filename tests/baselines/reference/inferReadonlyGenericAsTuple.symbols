@@ -1,0 +1,31 @@
+=== tests/cases/compiler/inferReadonlyGenericAsTuple.ts ===
+function compute<TS extends readonly unknown[]>(
+>compute : Symbol(compute, Decl(inferReadonlyGenericAsTuple.ts, 0, 0))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 17))
+
+  sources: TS,
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 0, 48))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 17))
+
+  func: (...args: TS) => number,
+>func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 1, 14))
+>args : Symbol(args, Decl(inferReadonlyGenericAsTuple.ts, 2, 9))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 17))
+
+): number {
+  return func(...sources);
+>func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 1, 14))
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 0, 48))
+}
+
+compute(["abc", 123], (str, num) => {
+>compute : Symbol(compute, Decl(inferReadonlyGenericAsTuple.ts, 0, 0))
+>str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 7, 23))
+>num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 7, 27))
+
+  return str.length + num;
+>str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 7, 23))
+>num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 7, 27))
+
+});
+

@@ -1,0 +1,38 @@
+=== tests/cases/compiler/inferReadonlyGenericAsTuple.ts ===
+function compute<TS extends readonly unknown[]>(
+>compute : <TS extends readonly unknown[]>(sources: TS, func: (...args: TS) => number) => number
+
+  sources: TS,
+>sources : TS
+
+  func: (...args: TS) => number,
+>func : (...args: TS) => number
+>args : TS
+
+): number {
+  return func(...sources);
+>func(...sources) : number
+>func : (...args: TS) => number
+>...sources : unknown
+>sources : TS
+}
+
+compute(["abc", 123], (str, num) => {
+>compute(["abc", 123], (str, num) => {  return str.length + num;}) : number
+>compute : <TS extends readonly unknown[]>(sources: TS, func: (...args: TS) => number) => number
+>["abc", 123] : (string | number)[]
+>"abc" : "abc"
+>123 : 123
+>(str, num) => {  return str.length + num;} : (str: string | number, num: string | number) => any
+>str : string | number
+>num : string | number
+
+  return str.length + num;
+>str.length + num : any
+>str.length : any
+>str : string | number
+>length : any
+>num : string | number
+
+});
+
