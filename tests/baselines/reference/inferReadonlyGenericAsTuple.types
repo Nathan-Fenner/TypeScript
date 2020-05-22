@@ -1,6 +1,6 @@
 === tests/cases/compiler/inferReadonlyGenericAsTuple.ts ===
-function compute<TS extends readonly unknown[]>(
->compute : <TS extends readonly unknown[]>(sources: TS, func: (...args: TS) => number) => number
+function computeArrAny<TS extends readonly unknown[]>(
+>computeArrAny : <TS extends readonly unknown[]>(sources: TS, func: (...args: TS) => number) => number
 
   sources: TS,
 >sources : TS
@@ -17,22 +17,99 @@ function compute<TS extends readonly unknown[]>(
 >sources : TS
 }
 
-compute(["abc", 123], (str, num) => {
->compute(["abc", 123], (str, num) => {  return str.length + num;}) : number
->compute : <TS extends readonly unknown[]>(sources: TS, func: (...args: TS) => number) => number
->["abc", 123] : (string | number)[]
+computeArrAny(["abc", 123], (str, num) => {
+>computeArrAny(["abc", 123], (str, num) => {  return str.length + num;}) : number
+>computeArrAny : <TS extends readonly unknown[]>(sources: TS, func: (...args: TS) => number) => number
+>["abc", 123] : [string, number]
 >"abc" : "abc"
 >123 : 123
->(str, num) => {  return str.length + num;} : (str: string | number, num: string | number) => any
->str : string | number
->num : string | number
+>(str, num) => {  return str.length + num;} : (str: string, num: number) => number
+>str : string
+>num : number
 
   return str.length + num;
->str.length + num : any
->str.length : any
->str : string | number
->length : any
->num : string | number
+>str.length + num : number
+>str.length : number
+>str : string
+>length : number
+>num : number
+
+});
+
+function computeArrStr<TS extends readonly string[]>(
+>computeArrStr : <TS extends readonly string[]>(sources: TS, func: (...args: TS) => number) => number
+
+  sources: TS,
+>sources : TS
+
+  func: (...args: TS) => number,
+>func : (...args: TS) => number
+>args : TS
+
+): number {
+  return func(...sources);
+>func(...sources) : number
+>func : (...args: TS) => number
+>...sources : string
+>sources : TS
+}
+
+computeArrStr(["abc", "def"], (str1, str2) => {
+>computeArrStr(["abc", "def"], (str1, str2) => {  return str1.length + str2.length;}) : number
+>computeArrStr : <TS extends readonly string[]>(sources: TS, func: (...args: TS) => number) => number
+>["abc", "def"] : [string, string]
+>"abc" : "abc"
+>"def" : "def"
+>(str1, str2) => {  return str1.length + str2.length;} : (str1: string, str2: string) => number
+>str1 : string
+>str2 : string
+
+  return str1.length + str2.length;
+>str1.length + str2.length : number
+>str1.length : number
+>str1 : string
+>length : number
+>str2.length : number
+>str2 : string
+>length : number
+
+});
+
+
+function computeArrTup<TS extends readonly [string, number]>(
+>computeArrTup : <TS extends readonly [string, number]>(sources: TS, func: (...args: TS) => number) => number
+
+  sources: TS,
+>sources : TS
+
+  func: (...args: TS) => number,
+>func : (...args: TS) => number
+>args : TS
+
+): number {
+  return func(...sources);
+>func(...sources) : number
+>func : (...args: TS) => number
+>...sources : string | number
+>sources : TS
+}
+
+computeArrTup(["abc", 123], (str, num) => {
+>computeArrTup(["abc", 123], (str, num) => {  return str.length + num;}) : number
+>computeArrTup : <TS extends readonly [string, number]>(sources: TS, func: (...args: TS) => number) => number
+>["abc", 123] : [string, number]
+>"abc" : "abc"
+>123 : 123
+>(str, num) => {  return str.length + num;} : (str: string, num: number) => number
+>str : string
+>num : number
+
+  return str.length + num;
+>str.length + num : number
+>str.length : number
+>str : string
+>length : number
+>num : number
 
 });
 

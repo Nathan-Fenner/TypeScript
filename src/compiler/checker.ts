@@ -23153,6 +23153,15 @@ namespace ts {
                     return createArrayLiteralType(createTupleType(elementTypes, minLength, hasEndingSpreadElement));
                 }
             }
+
+            // When we contextually know that the array should be read-only, typing it as a
+            // readonly tuple is more precise. This rarely introduces overly-precise typings,
+            // since in non-generic contexts, the array will immediately decay to the "regular"
+            // (union elements)[] type.
+            if (!hasNonEndingSpreadElement && !hasEndingSpreadElement && contextualType && isReadonlyArrayType(getBaseConstraintOrType(contextualType))) {
+                return createArrayLiteralType(createTupleType(elementTypes, elementCount, /* hasEndingSpreadElement */ false, /* readonly */ true));
+            }
+
             return createArrayLiteralType(createArrayType(elementTypes.length ?
                 getUnionType(elementTypes, UnionReduction.Subtype) :
                 strictNullChecks ? implicitNeverType : undefinedWideningType, inConstContext));

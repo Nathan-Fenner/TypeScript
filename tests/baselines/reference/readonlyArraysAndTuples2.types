@@ -35,7 +35,7 @@ class A {
 
   j: readonly string[] = [];
 >j : readonly string[]
->[] : never[]
+>[] : readonly []
 
   @someDec
 >someDec : any

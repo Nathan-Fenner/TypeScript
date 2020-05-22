@@ -1,31 +1,100 @@
 === tests/cases/compiler/inferReadonlyGenericAsTuple.ts ===
-function compute<TS extends readonly unknown[]>(
->compute : Symbol(compute, Decl(inferReadonlyGenericAsTuple.ts, 0, 0))
->TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 17))
+function computeArrAny<TS extends readonly unknown[]>(
+>computeArrAny : Symbol(computeArrAny, Decl(inferReadonlyGenericAsTuple.ts, 0, 0))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 23))
 
   sources: TS,
->sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 0, 48))
->TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 17))
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 0, 54))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 23))
 
   func: (...args: TS) => number,
 >func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 1, 14))
 >args : Symbol(args, Decl(inferReadonlyGenericAsTuple.ts, 2, 9))
->TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 17))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 0, 23))
 
 ): number {
   return func(...sources);
 >func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 1, 14))
->sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 0, 48))
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 0, 54))
 }
 
-compute(["abc", 123], (str, num) => {
->compute : Symbol(compute, Decl(inferReadonlyGenericAsTuple.ts, 0, 0))
->str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 7, 23))
->num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 7, 27))
+computeArrAny(["abc", 123], (str, num) => {
+>computeArrAny : Symbol(computeArrAny, Decl(inferReadonlyGenericAsTuple.ts, 0, 0))
+>str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 7, 29))
+>num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 7, 33))
 
   return str.length + num;
->str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 7, 23))
->num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 7, 27))
+>str.length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 7, 29))
+>length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 7, 33))
+
+});
+
+function computeArrStr<TS extends readonly string[]>(
+>computeArrStr : Symbol(computeArrStr, Decl(inferReadonlyGenericAsTuple.ts, 9, 3))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 11, 23))
+
+  sources: TS,
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 11, 53))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 11, 23))
+
+  func: (...args: TS) => number,
+>func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 12, 14))
+>args : Symbol(args, Decl(inferReadonlyGenericAsTuple.ts, 13, 9))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 11, 23))
+
+): number {
+  return func(...sources);
+>func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 12, 14))
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 11, 53))
+}
+
+computeArrStr(["abc", "def"], (str1, str2) => {
+>computeArrStr : Symbol(computeArrStr, Decl(inferReadonlyGenericAsTuple.ts, 9, 3))
+>str1 : Symbol(str1, Decl(inferReadonlyGenericAsTuple.ts, 18, 31))
+>str2 : Symbol(str2, Decl(inferReadonlyGenericAsTuple.ts, 18, 36))
+
+  return str1.length + str2.length;
+>str1.length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>str1 : Symbol(str1, Decl(inferReadonlyGenericAsTuple.ts, 18, 31))
+>length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>str2.length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>str2 : Symbol(str2, Decl(inferReadonlyGenericAsTuple.ts, 18, 36))
+>length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+
+});
+
+
+function computeArrTup<TS extends readonly [string, number]>(
+>computeArrTup : Symbol(computeArrTup, Decl(inferReadonlyGenericAsTuple.ts, 20, 3))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 23, 23))
+
+  sources: TS,
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 23, 61))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 23, 23))
+
+  func: (...args: TS) => number,
+>func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 24, 14))
+>args : Symbol(args, Decl(inferReadonlyGenericAsTuple.ts, 25, 9))
+>TS : Symbol(TS, Decl(inferReadonlyGenericAsTuple.ts, 23, 23))
+
+): number {
+  return func(...sources);
+>func : Symbol(func, Decl(inferReadonlyGenericAsTuple.ts, 24, 14))
+>sources : Symbol(sources, Decl(inferReadonlyGenericAsTuple.ts, 23, 61))
+}
+
+computeArrTup(["abc", 123], (str, num) => {
+>computeArrTup : Symbol(computeArrTup, Decl(inferReadonlyGenericAsTuple.ts, 20, 3))
+>str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 30, 29))
+>num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 30, 33))
+
+  return str.length + num;
+>str.length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>str : Symbol(str, Decl(inferReadonlyGenericAsTuple.ts, 30, 29))
+>length : Symbol(String.length, Decl(lib.es5.d.ts, --, --))
+>num : Symbol(num, Decl(inferReadonlyGenericAsTuple.ts, 30, 33))
 
 });
 
